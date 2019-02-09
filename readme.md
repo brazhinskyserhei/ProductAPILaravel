@@ -209,6 +209,29 @@ php artisan db:seed --class=ProductsCategoriesSeeder
 
 ### Добавить категорию (с авторизацией)
 
+## Заголовки
+
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Параметр</th>
+    </tr>
+    <tr>
+        <td>Accept</td>
+        <td>application/json</td>
+    </tr>
+     <tr>
+        <td>Content-Type</td>
+        <td>application/json</td>
+    </tr>
+    <tr>
+        <td>Authorization</td>
+        <td>Bearer {{токен}}</td>
+    </tr>
+    
+    
+</table> 
+
 <table>
     <tr>
         <th>Метод</th>
@@ -236,6 +259,31 @@ php artisan db:seed --class=ProductsCategoriesSeeder
 </table>
 
 ### Обновить категорию (с авторизацией)
+
+
+
+## Заголовки
+
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Параметр</th>
+    </tr>
+    <tr>
+        <td>Accept</td>
+        <td>application/json</td>
+    </tr>
+     <tr>
+        <td>Content-Type</td>
+        <td>application/json</td>
+    </tr>
+    <tr>
+        <td>Authorization</td>
+        <td>Bearer {{токен}}</td>
+    </tr>
+    
+    
+</table> 
 
 <table>
     <tr>
@@ -265,6 +313,21 @@ php artisan db:seed --class=ProductsCategoriesSeeder
 
 ### Удалить категорию (с авторизацией)
 
+
+## Заголовки
+
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Параметр</th>
+    </tr>
+   
+    <td>Authorization</td>
+        <td>Bearer {{токен}}</td>
+    </tr>
+    
+</table> 
+
 <table>
     <tr>
         <th>Метод</th>
@@ -275,4 +338,8 @@ php artisan db:seed --class=ProductsCategoriesSeeder
         <td>api/categories/{id}</td>
     </tr>
 </table>
+
+## Продукты
+
+
 
