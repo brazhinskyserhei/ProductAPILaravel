@@ -316,17 +316,8 @@ php artisan db:seed --class=ProductsCategoriesSeeder
 
 ## Заголовки
 
-<table>
-    <tr>
-        <th>Название</th>
-        <th>Параметр</th>
-    </tr>
-   
-    <td>Authorization</td>
-        <td>Bearer {{токен}}</td>
-    </tr>
-    
-</table> 
+
+
 
 <table>
     <tr>
@@ -341,5 +332,91 @@ php artisan db:seed --class=ProductsCategoriesSeeder
 
 ## Продукты
 
+### Добавить продукт (с авторизацией)
 
+## Заголовки
+
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Параметр</th>
+    </tr>
+    <tr>
+        <td>Accept</td>
+        <td>application/json</td>
+    </tr>
+    <tr>
+        <td>Authorization</td>
+        <td>Bearer {{токен}}</td>
+    </tr>
+</table> 
+
+<table>
+    <tr>
+        <th>Метод</th>
+        <th>URL</th>
+    </tr>
+    <tr>
+        <td>POST</td>
+        <td>api/products</td>
+    </tr>
+</table> 
+
+### Параметры
+
+<table>
+    <th>Параметр</th>
+    <th>Описание</th>
+    <tr>
+        <td>title*</td>
+        <td>string</td>
+    </tr>
+     <tr>
+        <td>price*</td>
+        <td>numeric</td>
+    </tr>  
+    <tr>
+        <td>old_price*</td>
+        <td>numeric</td>
+    </tr> 
+     <tr>
+        <td>description*</td>
+        <td>string</td>
+    </tr> 
+    
+    <tr>
+        <td>count*</td>
+        <td>numeric</td>
+    </tr>
+    
+    <tr>
+        <td>vendor_code*</td>
+        <td>numeric</td>
+    </tr>
+    
+    <tr>
+        <td>status*</td>
+        <td>numeric</td>
+    </tr>
+    
+    <tr>
+        <td>status*</td>
+        <td>numeric</td>
+    </tr>
+    
+     <tr>
+        <td>discount*</td>
+        <td>numeric</td>
+    </tr>
+    
+     <tr>
+        <td>image</td>
+        <td>file</td>
+    </tr>
+
+    <tr>
+        <td>categories</td>
+        <td>string</td>
+    </tr>
+</table>
 
