@@ -191,89 +191,88 @@ php artisan db:seed --class=ProductsCategoriesSeeder
 </tr>
 </table> 
 
-### Ответ
 
- ```
-{
-    "data": [
-        {
-            "id": 1,
-            "name": "quaerat",
-            "description": "Quis minima maxime nobis occaecati accusantium alias. Repudiandae ut quis doloremque expedita est tempora. Aspernatur voluptatem voluptatem itaque numquam laboriosam aspernatur quo quo.",
-            "created_at": "2019-02-09 16:19:36",
-            "user": {
-                "data": {
-                    "name": "Ms. Keely Heidenreich",
-                    "email": "rsporer@example.com",
-                    "avatar": "http://productapi/public/images/users/no-avatar.jpg"
-                }
-            }
-        },
-        {
-            "id": 2,
-            "name": "laboriosam",
-            "description": "Quibusdam doloremque nisi numquam enim voluptatibus consequuntur soluta. Sequi delectus accusantium iusto repudiandae. Necessitatibus sapiente dolor itaque ut officia laborum hic.",
-            "created_at": "2019-02-09 16:19:36",
-            "user": {
-                "data": {
-                    "name": "Yessenia Crooks",
-                    "email": "gaylord.jesus@example.net",
-                    "avatar": "http://productapi/public/images/users/no-avatar.jpg"
-                }
-            }
-        },
-        {
-            "id": 3,
-            "name": "nulla",
-            "description": "Corporis nesciunt culpa impedit totam. Tenetur quia perspiciatis reiciendis officia cumque. Ducimus qui aut aspernatur consequatur modi impedit voluptate.",
-            "created_at": "2019-02-09 16:19:36",
-            "user": {
-                "data": {
-                    "name": "Mrs. Jaqueline Kilback",
-                    "email": "flatley.alverta@example.com",
-                    "avatar": "http://productapi/public/images/users/no-avatar.jpg"
-                }
-            }
-        },
-        {
-            "id": 4,
-            "name": "velit",
-            "description": "Similique quis dicta ullam excepturi deserunt. Recusandae consequatur ipsam dolores voluptatem.",
-            "created_at": "2019-02-09 16:19:36",
-            "user": {
-                "data": {
-                    "name": "Denis Kuhic",
-                    "email": "margarett.raynor@example.org",
-                    "avatar": "http://productapi/public/images/users/no-avatar.jpg"
-                }
-            }
-        },
-        {
-            "id": 5,
-            "name": "ut",
-            "description": "Quisquam voluptatem numquam ut molestias magni. Culpa laborum voluptas asperiores fugit iusto. Veritatis voluptatibus et quo et. Eaque a consequatur tenetur nemo deleniti.",
-            "created_at": "2019-02-09 16:19:36",
-            "user": {
-                "data": {
-                    "name": "Ms. Keely Heidenreich",
-                    "email": "rsporer@example.com",
-                    "avatar": "http://productapi/public/images/users/no-avatar.jpg"
-                }
-            }
-        }
-    ],
-    "meta": {
-        "pagination": {
-            "total": 9,
-            "count": 5,
-            "per_page": 5,
-            "current_page": 1,
-            "total_pages": 2,
-            "links": {
-                "next": "http://productapi/api/categories?page=2"
-            }
-        }
-    }
-}}
-```
+### Список всех товаров по определенной категории (без регистрации)
+
+<table>
+<tr>
+    <th>Метод</th>
+    <th>URL</th>
+</tr>
+<tr>
+    <td>GET</td>
+    <td>api/categories/{id}</td>
+</tr>
+</table> 
+
+## Категории
+
+### Добавить категорию (с авторизацией)
+
+<table>
+    <tr>
+        <th>Метод</th>
+        <th>URL</th>
+    </tr>
+    <tr>
+        <td>POST</td>
+        <td>/api/categories</td>
+    </tr>
+</table> 
+
+### Параметры
+
+<table>
+    <th>Параметр</th>
+    <th>Описание</th>
+    <tr>
+        <td>name*</td>
+        <td>string</td>
+    </tr>
+     <tr>
+        <td>description*</td>
+        <td>string</td>
+    </tr>   
+</table>
+
+### Обновить категорию (с авторизацией)
+
+<table>
+    <tr>
+        <th>Метод</th>
+        <th>URL</th>
+    </tr>
+    <tr>
+        <td>PUT</td>
+        <td>api/categories/{id}</td>
+    </tr>
+</table> 
+
+### Параметры
+
+<table>
+    <th>Параметр</th>
+    <th>Описание</th>
+    <tr>
+        <td>name*</td>
+        <td>string</td>
+    </tr>
+     <tr>
+        <td>description*</td>
+        <td>string</td>
+    </tr>   
+</table>
+
+### Удалить категорию (с авторизацией)
+
+<table>
+    <tr>
+        <th>Метод</th>
+        <th>URL</th>
+    </tr>
+    <tr>
+        <td>DELETE</td>
+        <td>api/categories/{id}</td>
+    </tr>
+</table>
 
