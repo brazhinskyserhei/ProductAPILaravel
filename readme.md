@@ -1,69 +1,489 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+## Запуск проекта
+Для запуска необходимо загрузить теущий проект с данного репозитория. Можно скачать на прямую или воспользоваться командой:
+```
+git clone https://github.com/brazhinskyserhei/ProductAPILaravel.git
+```
+В файле *.env* в корне проекта необходимо изменить парамеры приложения и базы данных:
+<table>
+<tr>
+    <th>Параметр</th>
+    <th>Описание</th>
+    <th>Пример</th>
+</tr>
+<tr>
+    <td>APP_URL</td>
+    <td>Имя домена</td>
+    <td>http://productapi</td>
+</tr>
+<tr>
+    <td>DB_CONNECTION</td>
+    <td>Сервер базы данных</td>
+    <td>mysql</td>
+</tr>
+ <tr>
+    <td>DB_HOST</td>
+    <td>Хост базы данных</td>
+    <td>mysql</td>
+</tr>
+ <tr>
+    <td>DB_PORT</td>
+    <td>Порт</td>
+    <td>3306</td>
+</tr> 
+ <tr>
+    <td>DB_DATABASE</td>
+    <td>Имя базы данных</td>
+    <td>test_task</td>
+</tr>
+ <tr>
+    <td>DB_USERNAME</td>
+    <td>Пльзователь базы данных</td>
+    <td>root</td>
+</tr>
+ <tr>
+    <td>DB_PASSWORD</td>
+    <td>Пароль</td>
+    <td>1234</td>
+</tr>
+</table> 
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Запуск миграций и генерация фейковых данных
+Для запуска миграций в консоле переходим в корень  проекта запускаем команду
+```
+php artisan migrate
+```
+<p>После этого должна быть создана структура табоицы со всеми таблицами и данными.</p>
+<p>Для генерации фейковых данных необходимо запустить сиды в консоле:</p>
 
-## About Laravel
+### Генерация фейковых пользователей
+```
+php artisan db:seed --class=UsersTableSeeder
+```
+### Генерация фейковых категорий
+```
+php artisan db:seed --class=CategoriesTableSeeder
+```
+### Генерация фейковых продуктов
+```
+php artisan db:seed --class=ProductsTableSeeder
+```
+### Генерация записей для промежуточной таблицы продуктов и категорий
+```
+php artisan db:seed --class=ProductsCategoriesSeeder
+```
+## Тестирование API
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+Для тестирования API можно вопользоваться люьбым HTTP-клиентом, напрмер Postman
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Регистрация пользователя
+<table>
+<tr>
+    <th>Метод</th>
+    <th>URL</th>
+</tr>
+<tr>
+    <td>POST</td>
+    <td>/api/register</td>
+</tr>
+</table> 
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+### Параметры
 
-## Learning Laravel
+<table>
+    <tr>
+        <th>Параметр</th>
+        <th>Тип</th>
+        <th>Пример</th>
+    </tr>
+    <tr>
+        <td>name*</td>
+        <td>string</td>
+        <td>Sergey</td>
+    </tr>
+    <tr>
+        <td>email*</td>
+        <td>string</td>
+        <td>sergey@site.com</td>
+    </tr>
+     <tr>
+        <td>password*</td>
+        <td>string</td>
+        <td>1234</td>
+    </tr>
+    <tr>
+        <td>password_confirmation*</td>
+        <td>string</td>
+        <td>1234</td>
+    </tr>
+     <tr>
+        <td>file</td>
+        <td>file</td>
+        <td>image.jpg</td>
+    </tr>    
+</table>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+### Ответ
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+ ```
+{
+    "user": {
+        "name": "Sergey",
+        "email": "sergey@site.com",
+        "avatar": "http://productapi/public/images/users/no-avatar.jpg",
+        "updated_at": "2019-02-09 16:50:09",
+        "created_at": "2019-02-09 16:50:09",
+        "id": 10
+    },
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9wcm9kdWN0YXBpXC9hcGlcL3JlZ2lzdGVyIiwiaWF0IjoxNTQ5NzMxMDA5LCJleHAiOjE1NDk3MzQ2MDksIm5iZiI6MTU0OTczMTAwOSwianRpIjoiWHlYR1p1Y28wNGplanNzUyIsInN1YiI6MTAsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.uA4-DZDgEuJGtrHHG-u0UJc9IP3AowXdSLSxmBs4uDI"
+}
+```
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+### Авторизация(генерация токена)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
+<table>
+<tr>
+    <th>Метод</th>
+    <th>URL</th>
+</tr>
+<tr>
+    <td>POST</td>
+    <td>api/login</td>
+</tr>
+</table> 
 
-## Contributing
+### Параметры
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<table>
+    <th>Параметр</th>
+    <th>Описание</th>
+    <th>Пример</th>
+    <tr>
+        <td>email*</td>
+        <td>string</td>
+        <td>sergey@site.com</td>
+    </tr>
+     <tr>
+        <td>password*</td>
+        <td>string</td>
+        <td>1234</td>
+    </tr>   
+</table>
 
-## Security Vulnerabilities
+### Ответ
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+ ```
+{
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9wcm9kdWN0YXBpXC9hcGlcL2xvZ2luIiwiaWF0IjoxNTQ5NzI2MjU4LCJleHAiOjE1NDk3Mjk4NTgsIm5iZiI6MTU0OTcyNjI1OCwianRpIjoiakx2TkZXVzlNZFl2TWplRyIsInN1YiI6OCwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.WxMV9ZQZRFVly4ARa9RGkg48634FJr22Ji02tgwivLs"
+}
+```
 
-## License
+### Список всех категорий (без регистрации)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<table>
+<tr>
+    <th>Метод</th>
+    <th>URL</th>
+</tr>
+<tr>
+    <td>GET</td>
+    <td>api/categories</td>
+</tr>
+</table> 
+
+
+### Список всех товаров по определенной категории (без регистрации)
+
+<table>
+<tr>
+    <th>Метод</th>
+    <th>URL</th>
+</tr>
+<tr>
+    <td>GET</td>
+    <td>api/categories/{id}</td>
+</tr>
+</table> 
+
+## Категории
+
+### Добавить категорию (с авторизацией)
+
+## Заголовки
+
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Параметр</th>
+    </tr>
+    <tr>
+        <td>Accept</td>
+        <td>application/json</td>
+    </tr>
+     <tr>
+        <td>Content-Type</td>
+        <td>application/json</td>
+    </tr>
+    <tr>
+        <td>Authorization</td>
+        <td>Bearer {{токен}}</td>
+    </tr>
+    
+    
+</table> 
+
+<table>
+    <tr>
+        <th>Метод</th>
+        <th>URL</th>
+    </tr>
+    <tr>
+        <td>POST</td>
+        <td>/api/categories</td>
+    </tr>
+</table> 
+
+### Параметры
+
+<table>
+    <th>Параметр</th>
+    <th>Описание</th>
+    <tr>
+        <td>name*</td>
+        <td>string</td>
+    </tr>
+     <tr>
+        <td>description*</td>
+        <td>string</td>
+    </tr>   
+</table>
+
+### Обновить категорию (с авторизацией)
+
+
+
+## Заголовки
+
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Параметр</th>
+    </tr>
+    <tr>
+        <td>Accept</td>
+        <td>application/json</td>
+    </tr>
+     <tr>
+        <td>Content-Type</td>
+        <td>application/json</td>
+    </tr>
+    <tr>
+        <td>Authorization</td>
+        <td>Bearer {{токен}}</td>
+    </tr>
+    
+    
+</table> 
+
+<table>
+    <tr>
+        <th>Метод</th>
+        <th>URL</th>
+    </tr>
+    <tr>
+        <td>PUT</td>
+        <td>api/categories/{id}</td>
+    </tr>
+</table> 
+
+### Параметры
+
+<table>
+    <th>Параметр</th>
+    <th>Описание</th>
+    <tr>
+        <td>name*</td>
+        <td>string</td>
+    </tr>
+     <tr>
+        <td>description*</td>
+        <td>string</td>
+    </tr>   
+</table>
+
+### Удалить категорию (с авторизацией)
+
+
+## Заголовки
+
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Параметр</th>
+    </tr>
+    <tr>
+        <td>Authorization</td>
+        <td>Bearer {{токен}}</td>
+    </tr>
+</table> 
+
+
+<table>
+    <tr>
+        <th>Метод</th>
+        <th>URL</th>
+    </tr>
+    <tr>
+        <td>DELETE</td>
+        <td>api/categories/{id}</td>
+    </tr>
+</table>
+
+## Продукты
+
+### Добавить продукт (с авторизацией)
+
+## Заголовки
+
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Параметр</th>
+    </tr>
+    <tr>
+        <td>Accept</td>
+        <td>application/json</td>
+    </tr>
+    <tr>
+        <td>Authorization</td>
+        <td>Bearer {{токен}}</td>
+    </tr>
+</table> 
+
+<table>
+    <tr>
+        <th>Метод</th>
+        <th>URL</th>
+    </tr>
+    <tr>
+        <td>POST</td>
+        <td>api/products</td>
+    </tr>
+</table> 
+
+### Параметры
+
+<table>
+    <th>Параметр</th>
+    <th>Описание</th>
+    <tr>
+        <td>count*</td>
+        <td>numeric</td>
+    </tr>
+    <tr>
+        <td>vendor_code*</td>
+        <td>numeric</td>
+    </tr>
+    <tr>
+        <td>status*</td>
+        <td>numeric</td>
+    </tr>
+    <tr>
+        <td>status*</td>
+        <td>numeric</td>
+    </tr>
+     <tr>
+        <td>discount*</td>
+        <td>numeric</td>
+    </tr>
+     <tr>
+        <td>image</td>
+        <td>file</td>
+    </tr>
+    <tr>
+        <td>categories</td>
+        <td>string</td>
+    </tr>
+    <tr>
+        <td>title*</td>
+        <td>string</td>
+    </tr>
+     <tr>
+        <td>price*</td>
+        <td>numeric</td>
+    </tr>  
+    <tr>
+        <td>old_price*</td>
+        <td>numeric</td>
+    </tr> 
+     <tr>
+        <td>description*</td>
+        <td>string</td>
+    </tr> 
+</table>
+
+### Обновить продукт (с авторизацией)
+
+## Заголовки
+
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Параметр</th>
+    </tr>
+    <tr>
+        <td>Accept</td>
+        <td>application/json</td>
+    </tr>
+    <tr>
+        <td>Authorization</td>
+        <td>Bearer {{токен}}</td>
+    </tr>
+     <tr>
+        <td>Content-Type</td>
+        <td>application/x-www-form-urlencoded</td>
+    </tr>
+</table> 
+
+<table>
+    <tr>
+        <th>Метод</th>
+        <th>URL</th>
+    </tr>
+    <tr>
+        <td>PUT</td>
+        <td>api/products/{id}</td>
+    </tr>
+</table> 
+
+### Параметры
+
+Анлогичны добавлению
+
+### Удалить продукт (с авторизацией)
+
+
+## Заголовки
+
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Параметр</th>
+    </tr>
+    <tr>
+        <td>Authorization</td>
+        <td>Bearer {{токен}}</td>
+    </tr>
+</table> 
+
+
+<table>
+    <tr>
+        <th>Метод</th>
+        <th>URL</th>
+    </tr>
+    <tr>
+        <td>DELETE</td>
+        <td>api/products/{id}</td>
+    </tr>
+</table>
