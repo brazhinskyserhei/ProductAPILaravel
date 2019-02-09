@@ -51,36 +51,45 @@ class ProductController extends Controller
             ->toArray();
     }
 
-    public function update(StoreProductRequest $request,Product $product)
+    public function update(StoreProductRequest $request, $id)
     {
-        $product->title = $request->get('title', $product->title);
-        $product->price = $request->get('price', $product->price);
-        $product->old_price = $request->get('old_price', $product->old_price);
-        $product->description = $request->get('description', $product->description);
-        $product->count = $request->get('count', $product->count);
-        $product->vendor_code = $request->get('vendor_code', $product->vendor_code);
-        $product->status = $request->get('status', $product->status);
-        $product->discount = $request->get('discount', $product->discount);
-        $product->save();
 
-        $product->uploadImage($request->file('image'));
+        $product = Product::find($id);
+        if ($product) {
+            $product->title = $request->get('title', $product->title);
+            $product->price = $request->get('price', $product->price);
+            $product->old_price = $request->get('old_price', $product->old_price);
+            $product->description = $request->get('description', $product->description);
+            $product->count = $request->get('count', $product->count);
+            $product->vendor_code = $request->get('vendor_code', $product->vendor_code);
+            $product->status = $request->get('status', $product->status);
+            $product->discount = $request->get('discount', $product->discount);
+            $product->save();
 
-        $categories = explode(",", $request->categories);
-        $product->categories()->sync($categories);
+            $product->uploadImage($request->file('image'));
 
-        return fractal()
-            ->item($product)
-            ->parseIncludes(['user', 'categories'])
-            ->transformWith(new ProductsResponse())
-            ->toArray();
+            $categories = explode(",", $request->categories);
+            $product->categories()->sync($categories);
 
+            return fractal()
+                ->item($product)
+                ->parseIncludes(['user', 'categories'])
+                ->transformWith(new ProductsResponse())
+                ->toArray();
+        } else {
+            return response()->json(['errors' => 'This product does not exist'], 404);
+        }
 
     }
 
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        $product->delete();
-
-        return response('Product was deleted', 204);
+        $product = Product::find($id);
+        if ($product) {
+            $product->delete();
+            return response()->json(['susses' => 'This product deleted'], 204);
+        } else {
+            return response()->json(['errors' => 'This product does not exist'], 404);
+        }
     }
 }

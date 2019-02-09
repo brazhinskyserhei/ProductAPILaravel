@@ -29,12 +29,16 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category = Category::find($id);
-
-        return fractal()
-            ->item($category)
-            ->parseIncludes(['user', 'products','products.user'])
-            ->transformWith(new CategoriesResponse())
-            ->toArray();
+        if ($category) {
+            return fractal()
+                ->item($category)
+                ->parseIncludes(['user', 'products', 'products.user'])
+                ->transformWith(new CategoriesResponse())
+                ->toArray();
+        }
+        else{
+            return response()->json(['errors' => 'This category does not exist'], 404);
+        }
 
 
     }
@@ -54,10 +58,11 @@ class CategoryController extends Controller
             ->toArray();
     }
 
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(UpdateCategoryRequest $request, $id)
     {
+        $category = Category::find($id);
         if ($category) {
-            $category->name =  $request->get('name', $request->name);
+            $category->name = $request->get('name', $request->name);
             $category->description = $request->get('description', $request->description);
             $category->save();
             return fractal()
@@ -66,16 +71,25 @@ class CategoryController extends Controller
                 ->transformWith(new CategoriesResponse)
                 ->toArray();
         } else {
-            return response(null, 404);
+            return response()->json(['errors' => 'This category does not exist'], 404);
         }
 
     }
 
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        $category->delete();
+        $category = Category::find($id);
 
-        return response('Category was deleted', 204);
+        if( $category){
+            $category->delete();
+            return response()->json(['susses' => 'This category deleted'], 204);
+        }
+        else{
+            return response()->json(['errors' => 'This category does not exist'], 404);
+        }
+
+
+
     }
 
 }
