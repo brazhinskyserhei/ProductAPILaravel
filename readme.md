@@ -316,7 +316,16 @@ php artisan db:seed --class=ProductsCategoriesSeeder
 
 ## Заголовки
 
-
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Параметр</th>
+    </tr>
+    <tr>
+        <td>Authorization</td>
+        <td>Bearer {{токен}}</td>
+    </tr>
+</table> 
 
 
 <table>
@@ -368,6 +377,34 @@ php artisan db:seed --class=ProductsCategoriesSeeder
     <th>Параметр</th>
     <th>Описание</th>
     <tr>
+        <td>count*</td>
+        <td>numeric</td>
+    </tr>
+    <tr>
+        <td>vendor_code*</td>
+        <td>numeric</td>
+    </tr>
+    <tr>
+        <td>status*</td>
+        <td>numeric</td>
+    </tr>
+    <tr>
+        <td>status*</td>
+        <td>numeric</td>
+    </tr>
+     <tr>
+        <td>discount*</td>
+        <td>numeric</td>
+    </tr>
+     <tr>
+        <td>image</td>
+        <td>file</td>
+    </tr>
+    <tr>
+        <td>categories</td>
+        <td>string</td>
+    </tr>
+    <tr>
         <td>title*</td>
         <td>string</td>
     </tr>
@@ -383,40 +420,70 @@ php artisan db:seed --class=ProductsCategoriesSeeder
         <td>description*</td>
         <td>string</td>
     </tr> 
-    
-    <tr>
-        <td>count*</td>
-        <td>numeric</td>
-    </tr>
-    
-    <tr>
-        <td>vendor_code*</td>
-        <td>numeric</td>
-    </tr>
-    
-    <tr>
-        <td>status*</td>
-        <td>numeric</td>
-    </tr>
-    
-    <tr>
-        <td>status*</td>
-        <td>numeric</td>
-    </tr>
-    
-     <tr>
-        <td>discount*</td>
-        <td>numeric</td>
-    </tr>
-    
-     <tr>
-        <td>image</td>
-        <td>file</td>
-    </tr>
-
-    <tr>
-        <td>categories</td>
-        <td>string</td>
-    </tr>
 </table>
 
+### Обновить продукт (с авторизацией)
+
+## Заголовки
+
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Параметр</th>
+    </tr>
+    <tr>
+        <td>Accept</td>
+        <td>application/json</td>
+    </tr>
+    <tr>
+        <td>Authorization</td>
+        <td>Bearer {{токен}}</td>
+    </tr>
+     <tr>
+        <td>Content-Type</td>
+        <td>application/x-www-form-urlencoded</td>
+    </tr>
+</table> 
+
+<table>
+    <tr>
+        <th>Метод</th>
+        <th>URL</th>
+    </tr>
+    <tr>
+        <td>PUT</td>
+        <td>api/products/{id}</td>
+    </tr>
+</table> 
+
+### Параметры
+
+Анлогичны добавлению
+
+### Удалить продукт (с авторизацией)
+
+
+## Заголовки
+
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Параметр</th>
+    </tr>
+    <tr>
+        <td>Authorization</td>
+        <td>Bearer {{токен}}</td>
+    </tr>
+</table> 
+
+
+<table>
+    <tr>
+        <th>Метод</th>
+        <th>URL</th>
+    </tr>
+    <tr>
+        <td>DELETE</td>
+        <td>api/products/{id}</td>
+    </tr>
+</table>
