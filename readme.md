@@ -3,6 +3,11 @@
 ```
 git clone https://github.com/brazhinskyserhei/ProductAPILaravel.git
 ```
+Устанавливаем зависимости
+```
+composer install
+```
+
 В файле *.env* в корне проекта необходимо изменить парамеры приложения и базы данных:
 <table>
 <tr>
