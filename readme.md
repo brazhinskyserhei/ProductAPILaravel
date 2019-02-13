@@ -7,6 +7,10 @@ git clone https://github.com/brazhinskyserhei/ProductAPILaravel.git
 ```
 composer install
 ```
+Скопируйте файл *.env.example* и переименуйте его на *.env*. Сгенерируйте ключ приложения командой:
+```
+php artisan key:generate
+```
 
 В файле *.env* в корне проекта необходимо изменить парамеры приложения и базы данных:
 <table>
